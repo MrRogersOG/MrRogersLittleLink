@@ -109,6 +109,42 @@
             margin-bottom: 0 !important;
             margin-right: 0 !important;
         }
+        
+        /* Remove all button borders for consistent clean look */
+        .button-yt,
+        .button-default,
+        .button,
+        button {
+            --button-border: none !important;
+            border: none !important;
+        }
+        
+        /* 2b2t Server Status Styling */
+        .server-status-container {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .status-indicator {
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .status-details {
+            font-size: 0.9em;
+            opacity: 0.8;
+            color: #cccccc;
+        }
+        
+        .status-online { color: #00ff00; }
+        .status-offline { color: #ff4444; }
+        .status-loading { color: #ffaa00; }
     </style>
 
     <!-- LittleLink Extended Stylesheet (Optional) -->
@@ -119,6 +155,115 @@
   </head>
 
 <body>
+    
+    <script>
+        // 2b2t Server Status Checker
+        async function check2b2tStatus() {
+            const statusIcon = document.getElementById('status-icon');
+            const statusText = document.getElementById('status-text');
+            const statusDetails = document.getElementById('status-details');
+            
+            try {
+                // Use mcsrvstat.us API for 2b2t - get detailed info
+                const response = await fetch('https://api.mcsrvstat.us/3/2b2t.org');
+                const data = await response.json();
+                
+                console.log('mcsrvstat API Response:', data); // Debug log to see all available data
+                
+                // Also try the official 2b2t.org API for additional data
+                try {
+                    const official2b2tResponse = await fetch('https://status.2b2t.org/public-api');
+                    const official2b2tData = await official2b2tResponse.json();
+                    console.log('Official 2b2t.org API Response:', official2b2tData);
+                } catch (officialApiError) {
+                    console.log('Official 2b2t API not available:', officialApiError.message);
+                }
+                
+                if (data.online) {
+                    statusIcon.textContent = '🟢';
+                    statusText.textContent = '2b2t.org - ONLINE';
+                    statusText.className = 'status-online';
+                    
+                    const playersOnline = data.players?.online || 'Unknown';
+                    const version = data.version || 'Unknown';
+                    const hostname = data.hostname || '2b2t.org';
+                    const port = data.port || '25565';
+                    
+                    // Get server location if available
+                    const serverLocation = data.geo?.country || 'Unknown';
+                    
+                    // Get ping/latency if available  
+                    const ping = data.debug?.ping ? `${Math.round(data.debug.ping)}ms` : 'Unknown';
+                    
+                    // Build comprehensive status display
+                    let statusInfo = `
+                        <div style="margin-bottom: 0.3rem;">
+                            <strong>Players:</strong> ${playersOnline} Online | 
+                            <strong>Ping:</strong> ${ping} | 
+                            <strong>Version:</strong> ${version}
+                        </div>
+                        <div style="margin-bottom: 0.3rem;">
+                            <strong>Server:</strong> ${hostname}:${port}
+                    `;
+                    
+                    if (serverLocation !== 'Unknown') {
+                        statusInfo += ` | <strong>Location:</strong> ${serverLocation}`;
+                    }
+                    
+                    statusInfo += `
+                        </div>
+                        <div style="font-size: 0.8em; opacity: 0.7;">
+                            Updated: ${new Date().toLocaleTimeString()}
+                        </div>
+                    `;
+                    
+                    // Check for queue info (might be in MOTD or other fields)
+                    if (data.motd?.clean && data.motd.clean.length > 1) {
+                        const queueInfo = data.motd.clean.find(line => 
+                            line.toLowerCase().includes('queue') || 
+                            line.toLowerCase().includes('position')
+                        );
+                        if (queueInfo) {
+                            statusInfo = `
+                                <div style="color: #ffaa00; font-weight: bold; margin-bottom: 0.3rem;">
+                                    Queue: ${queueInfo}
+                                </div>
+                            ` + statusInfo;
+                        }
+                    }
+                    
+                    statusDetails.innerHTML = statusInfo;
+                } else {
+                    statusIcon.textContent = '🔴';
+                    statusText.textContent = '2b2t.org - OFFLINE';
+                    statusText.className = 'status-offline';
+                    statusDetails.innerHTML = `
+                        <div>Server is currently offline or unreachable</div>
+                        <div style="font-size: 0.8em; opacity: 0.7;">
+                            Last checked: ${new Date().toLocaleTimeString()}
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                statusIcon.textContent = '⚠️';
+                statusText.textContent = '2b2t STATUS UNKNOWN';
+                statusText.className = 'status-loading';
+                statusDetails.innerHTML = `
+                    <div>Unable to fetch server data</div>
+                    <div style="font-size: 0.8em; opacity: 0.7;">
+                        Error: ${error.message}
+                    </div>
+                `;
+                console.error('Error checking 2b2t status:', error);
+            }
+        }
+        
+        // Check status when page loads
+        document.addEventListener('DOMContentLoaded', check2b2tStatus);
+        
+        // Update status every 2 minutes
+        setInterval(check2b2tStatus, 120000);
+    </script>
 
     <div class="container">
         <div class="column">
@@ -139,37 +284,46 @@
             </h1>
 
             <!-- TNT Slogan and Tagline -->
-            <h2 style="font-family: 'Orbitron', 'Exo 2', 'Rajdhani', 'Saira', monospace; font-weight: 700; font-size: 1.2em; color: #ff4444; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); margin: 10px 0;">The Next Thing: 67th Incursion</h2>
+            <h2 style="font-family: 'Orbitron', 'Exo 2', 'Rajdhani', 'Saira', monospace; font-weight: 700; font-size: 1.2em; color: #ff4444; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); margin: 10px 0;">The Next Thing: 6 7 Incursion</h2>
             <p style="font-style: italic; font-size: 0.9em; opacity: 0.8;">"Every 30 seconds, a new player dies on the oldest <span style="text-decoration: line-through;">anarchy</span> preservation server in Minecraft"</p>
 
             <!-- All your buttons go here -->
             <div class="button-stack" role="navigation">
 
+              <!-- 2b2t Server Status -->
+              <div id="server-status" class="server-status-container">
+                <div class="status-indicator">
+                  <span id="status-icon">🔄</span>
+                  <span id="status-text">Checking 2b2t status...</span>
+                </div>
+                <div id="status-details" class="status-details"></div>
+              </div>
+
               <!-- YouTube Channel -->
               <a class="button button-yt button-with-description" href="https://www.youtube.com/@MrRogersOG" target="_blank" rel="noopener" role="button">
                 <div class="button-title-row">
                   <img class="icon" aria-hidden="true" src="images/icons/youtube.svg" alt="YouTube Logo">
-                  <div class="button-title">YouTube Channel</div>
+                  <div class="button-title">Madden Film Room</div>
                 </div>
-                <div class="button-description">Gaming videos & TNT operations</div>
+                <div class="button-description">Madden Strategy, Analysis, Exposés and Trolling</div>
               </a>
 
               <!-- Substack Newsletter -->
               <a class="button button-substack button-with-description" href="https://blocktheory.substack.com/" target="_blank" rel="noopener" role="button">
                 <div class="button-title-row">
                   <img class="icon" aria-hidden="true" src="images/icons/substack.svg" alt="Substack Logo">
-                  <div class="button-title">Block Theory Newsletter</div>
+                  <div class="button-title">Block Theory Substack</div>
                 </div>
-                <div class="button-description">Tech insights & digital freedom analysis</div>
+                <div class="button-description">Minecraft technical analysis & coding breakdowns</div>
               </a>
 
               <!-- Odysee Channel -->
               <a class="button button-default button-with-description" href="https://odysee.com/@MakaveliOutlaw:8?r=13BvyYrUBuRsVh6K1nnuATm3kiWS57d8" target="_blank" rel="noopener" role="button">
                 <div class="button-title-row">
                   <img class="icon" aria-hidden="true" src="images/icons/littlelink.svg" alt="Odysee Logo">
-                  <div class="button-title">Odysee Channel</div>
+                  <div class="button-title">Makaveli Outlaw</div>
                 </div>
-                <div class="button-description">Censorship-resistant video backup</div>
+                <div class="button-description">Pure trolling content across all genres</div>
               </a>
 
               <!-- Discord - The Madden Filmroom -->
@@ -187,7 +341,19 @@
                   <img class="icon" aria-hidden="true" src="images/icons/substack.svg" alt="Substack Logo">
                   <div class="button-title">Madden Film Room Substack</div>
                 </div>
-                <div class="button-description">Pro football breakdowns & game analysis</div>
+                <div class="button-description">Madden strategy, analysis & Exposés</div>
+              </a>
+
+              <!-- Separator for Investigation Content -->
+              <div style="margin: 1.5rem 0 0.5rem 0;"></div>
+
+              <!-- Mason Leaks Investigation -->
+              <a class="button button-default button-with-description" href="https://masonleaks.com/" target="_blank" rel="noopener" role="button">
+                <div class="button-title-row">
+                  <img class="icon" aria-hidden="true" src="images/icons/littlelink.svg" alt="Investigation Logo">
+                  <div class="button-title">Mason Leaks</div>
+                </div>
+                <div class="button-description">Documented evidence of Spawnmason misconduct</div>
               </a>
 
 
