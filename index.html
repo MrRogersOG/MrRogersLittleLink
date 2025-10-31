@@ -68,6 +68,47 @@
             position: relative;
             z-index: 1;
         }
+        
+        /* Custom button styling for descriptions - Override LittleLink defaults */
+        .button-with-description {
+            display: inline-flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-align: center !important;
+            padding: 0.75rem 1rem !important;
+        }
+        
+        /* Container for icon and title on same line */
+        .button-title-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+        
+        .button-title {
+            font-weight: 700;
+            font-size: 1.125rem;
+            text-align: center;
+            margin: 0;
+        }
+        
+        .button-description {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            line-height: 1.2;
+            text-align: center;
+            width: 100%;
+            font-weight: 400;
+        }
+        
+        /* Icon inline with title */
+        .button-with-description .icon {
+            margin-bottom: 0 !important;
+            margin-right: 0 !important;
+        }
     </style>
 
     <!-- LittleLink Extended Stylesheet (Optional) -->
@@ -97,23 +138,57 @@
               <div>MrRogersOG</div>
             </h1>
 
-            <!-- Add a short description about yourself or your brand -->
-            <p>Sharing insights on technology, gaming, and more.</p>
+            <!-- TNT Slogan and Tagline -->
+            <h2 style="font-family: 'Orbitron', 'Exo 2', 'Rajdhani', 'Saira', monospace; font-weight: 700; font-size: 1.2em; color: #ff4444; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); margin: 10px 0;">The Next Thing: 67th Incursion</h2>
+            <p style="font-style: italic; font-size: 0.9em; opacity: 0.8;">"Every 30 seconds, a new player dies on the oldest <span style="text-decoration: line-through;">anarchy</span> preservation server in Minecraft"</p>
 
             <!-- All your buttons go here -->
             <div class="button-stack" role="navigation">
 
               <!-- YouTube Channel -->
-              <a class="button button-yt" href="https://www.youtube.com/@MrRogersOG" target="_blank" rel="noopener" role="button"><img class="icon" aria-hidden="true" src="images/icons/youtube.svg" alt="YouTube Logo">YouTube Channel</a>
+              <a class="button button-yt button-with-description" href="https://www.youtube.com/@MrRogersOG" target="_blank" rel="noopener" role="button">
+                <div class="button-title-row">
+                  <img class="icon" aria-hidden="true" src="images/icons/youtube.svg" alt="YouTube Logo">
+                  <div class="button-title">YouTube Channel</div>
+                </div>
+                <div class="button-description">Gaming videos & TNT operations</div>
+              </a>
 
               <!-- Substack Newsletter -->
-              <a class="button button-substack" href="https://blocktheory.substack.com/" target="_blank" rel="noopener" role="button"><img class="icon" aria-hidden="true" src="images/icons/substack.svg" alt="Substack Logo">Block Theory Newsletter</a>
+              <a class="button button-substack button-with-description" href="https://blocktheory.substack.com/" target="_blank" rel="noopener" role="button">
+                <div class="button-title-row">
+                  <img class="icon" aria-hidden="true" src="images/icons/substack.svg" alt="Substack Logo">
+                  <div class="button-title">Block Theory Newsletter</div>
+                </div>
+                <div class="button-description">Tech insights & digital freedom analysis</div>
+              </a>
 
               <!-- Odysee Channel -->
-              <a class="button button-default" href="https://odysee.com/@MakaveliOutlaw:8?r=13BvyYrUBuRsVh6K1nnuATm3kiWS57d8" target="_blank" rel="noopener" role="button"><img class="icon" aria-hidden="true" src="images/icons/littlelink.svg" alt="Odysee Logo">Odysee Channel</a>
+              <a class="button button-default button-with-description" href="https://odysee.com/@MakaveliOutlaw:8?r=13BvyYrUBuRsVh6K1nnuATm3kiWS57d8" target="_blank" rel="noopener" role="button">
+                <div class="button-title-row">
+                  <img class="icon" aria-hidden="true" src="images/icons/littlelink.svg" alt="Odysee Logo">
+                  <div class="button-title">Odysee Channel</div>
+                </div>
+                <div class="button-description">Censorship-resistant video backup</div>
+              </a>
 
               <!-- Discord - The Madden Filmroom -->
-              <a class="button button-discord" href="https://discord.gg/fFBh9GPFqH" target="_blank" rel="noopener" role="button"><img class="icon" aria-hidden="true" src="images/icons/discord.svg" alt="Discord Logo">The Madden Filmroom</a>
+              <a class="button button-discord button-with-description" href="https://discord.gg/fFBh9GPFqH" target="_blank" rel="noopener" role="button">
+                <div class="button-title-row">
+                  <img class="icon" aria-hidden="true" src="images/icons/discord.svg" alt="Discord Logo">
+                  <div class="button-title">The Madden Filmroom</div>
+                </div>
+                <div class="button-description">Football strategy & analysis community</div>
+              </a>
+
+              <!-- Madden Film Room Substack -->
+              <a class="button button-substack button-with-description" href="https://mrrogersmfr.substack.com/" target="_blank" rel="noopener" role="button">
+                <div class="button-title-row">
+                  <img class="icon" aria-hidden="true" src="images/icons/substack.svg" alt="Substack Logo">
+                  <div class="button-title">Madden Film Room Newsletter</div>
+                </div>
+                <div class="button-description">Pro football breakdowns & game analysis</div>
+              </a>
 
 
       </div>
