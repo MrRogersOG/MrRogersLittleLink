@@ -89,6 +89,123 @@
             z-index: 1;
         }
         
+        /* Minecraft Particle System */
+        .particle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            overflow: hidden;
+        }
+        
+        /* TNT Explosion Particles */
+        .explosion-particle {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ffffff;
+            border-radius: 50%;
+            animation: explode 1.5s ease-out forwards;
+            opacity: 0;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+        }
+        
+        .smoke-particle {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #666666;
+            border-radius: 50%;
+            animation: smoke 2s ease-out forwards;
+            opacity: 0;
+            box-shadow: 0 0 20px rgba(102, 102, 102, 0.6);
+        }
+        
+        /* Portal Ambient Particles */
+        .portal-particle {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: radial-gradient(circle, #8a2be2 0%, #4b0082 50%, transparent 100%);
+            border-radius: 50%;
+            animation: portal-float 4s infinite ease-in-out;
+            opacity: 0;
+            box-shadow: 0 0 20px #8a2be2, 0 0 40px #4b0082;
+        }
+        
+        @keyframes explode {
+            0% {
+                opacity: 1;
+                transform: scale(1) translate(0, 0);
+                background: #ffff00;
+                box-shadow: 0 0 30px #ffff00;
+            }
+            20% {
+                background: #ff6600;
+                transform: scale(2.5);
+                box-shadow: 0 0 50px #ff6600;
+            }
+            60% {
+                background: #ff3300;
+                transform: scale(1.8) translate(calc(var(--dx) * 0.7), calc(var(--dy) * 0.7));
+                box-shadow: 0 0 40px #ff3300;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.3) translate(var(--dx), var(--dy));
+                background: #ffffff;
+                box-shadow: 0 0 10px #ffffff;
+            }
+        }
+        
+        @keyframes smoke {
+            0% {
+                opacity: 0.9;
+                transform: scale(0.3) translateY(0) rotate(0deg);
+                background: #333333;
+            }
+            50% {
+                opacity: 0.6;
+                transform: scale(1.5) translateY(-150px) rotate(180deg);
+                background: #666666;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(3) translateY(-400px) rotate(360deg);
+                background: #999999;
+            }
+        }
+        
+        @keyframes portal-float {
+            0% {
+                opacity: 0;
+                transform: translateY(0px) translateX(0px) scale(0.5) rotate(0deg);
+            }
+            20% {
+                opacity: 0.8;
+                transform: translateY(-100px) translateX(20px) scale(1.2) rotate(72deg);
+            }
+            40% {
+                opacity: 0.6;
+                transform: translateY(-200px) translateX(-30px) scale(0.9) rotate(144deg);
+            }
+            60% {
+                opacity: 0.9;
+                transform: translateY(-300px) translateX(15px) scale(1.1) rotate(216deg);
+            }
+            80% {
+                opacity: 0.4;
+                transform: translateY(-400px) translateX(-10px) scale(0.8) rotate(288deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-500px) translateX(0px) scale(0.3) rotate(360deg);
+            }
+        }
+        
         /* Custom button styling for descriptions - Override LittleLink defaults */
         .button-with-description {
             display: inline-flex !important;
@@ -597,10 +714,108 @@
             }
         }
         
-        // Start when page loads
+        // Minecraft Particle System
+        class MinecraftParticles {
+            constructor() {
+                this.container = null;
+                this.init();
+            }
+            
+            init() {
+                // Create particle container
+                this.container = document.createElement('div');
+                this.container.className = 'particle-container';
+                document.body.appendChild(this.container);
+                
+                // Start with TNT explosion, then transition to portal particles
+                this.tntExplosion();
+                setTimeout(() => this.startPortalParticles(), 2000);
+            }
+            
+            tntExplosion() {
+                const centerX = window.innerWidth / 2;
+                const centerY = window.innerHeight / 2;
+                
+                // Create massive explosion particles in multiple waves
+                for (let wave = 0; wave < 3; wave++) {
+                    for (let i = 0; i < 40; i++) {
+                        setTimeout(() => {
+                            const particle = document.createElement('div');
+                            particle.className = 'explosion-particle';
+                            
+                            const angle = (i / 40) * Math.PI * 2 + (wave * 0.5);
+                            const distance = Math.random() * 400 + 100 + (wave * 50);
+                            const dx = Math.cos(angle) * distance;
+                            const dy = Math.sin(angle) * distance;
+                            
+                            particle.style.left = centerX + 'px';
+                            particle.style.top = centerY + 'px';
+                            particle.style.setProperty('--dx', dx + 'px');
+                            particle.style.setProperty('--dy', dy + 'px');
+                            
+                            this.container.appendChild(particle);
+                            
+                            // Remove after animation
+                            setTimeout(() => particle.remove(), 2000);
+                        }, (i * 15) + (wave * 200));
+                    }
+                }
+                
+                // Add massive smoke particles
+                for (let i = 0; i < 30; i++) {
+                    setTimeout(() => {
+                        const smoke = document.createElement('div');
+                        smoke.className = 'smoke-particle';
+                        smoke.style.left = (centerX + Math.random() * 200 - 100) + 'px';
+                        smoke.style.top = (centerY + Math.random() * 100 - 50) + 'px';
+                        
+                        this.container.appendChild(smoke);
+                        setTimeout(() => smoke.remove(), 3000);
+                    }, i * 30);
+                }
+            }
+            
+            startPortalParticles() {
+                // Create ambient portal particles continuously
+                setInterval(() => {
+                    // Create multiple portal particles at once for swirling effect
+                    for (let j = 0; j < 3; j++) {
+                        setTimeout(() => {
+                            const particle = document.createElement('div');
+                            particle.className = 'portal-particle';
+                            
+                            particle.style.left = Math.random() * window.innerWidth + 'px';
+                            particle.style.top = window.innerHeight + 'px';
+                            particle.style.animationDelay = Math.random() * 1 + 's';
+                            particle.style.animationDuration = (Math.random() * 2 + 4) + 's';
+                            
+                            this.container.appendChild(particle);
+                            
+                            // Remove after animation cycle
+                            setTimeout(() => {
+                                if (particle.parentNode) particle.remove();
+                            }, 7000);
+                        }, j * 100);
+                    }
+                }, 600);
+            }
+        }
+        
+        // Start when page loads - Initialize both systems
+        let particleSystem;
+        
         document.addEventListener('DOMContentLoaded', () => {
             startRealTimeUpdates();
             updateVisitorCount();
+            
+            console.log('Initializing TNT particle system...');
+            particleSystem = new MinecraftParticles();
+            
+            // Expose globally for debugging
+            window.tntParticles = particleSystem;
+            
+            console.log('TNT particle system initialized!');
+        });
         });
     </script>
 
