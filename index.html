@@ -69,6 +69,19 @@
             pointer-events: none;
         }
         
+        /* Fix mobile background scrolling issue */
+        @media (max-width: 768px) {
+            body::before {
+                background-attachment: scroll;
+                position: absolute;
+                height: 100vh;
+            }
+            
+            body {
+                position: relative;
+            }
+        }
+        
         .container {
             position: relative;
             z-index: 1;
@@ -517,10 +530,11 @@
                 const data = await response.json();
                 
                 const countElement = document.getElementById('visitor-count');
-                if (countElement && data.value) {
+                if (countElement && data.value !== undefined) {
                     // Format number with commas for readability
                     const formattedCount = data.value.toLocaleString();
                     countElement.textContent = formattedCount;
+                    console.log('Visitor count updated to:', formattedCount);
                 }
                 
                 console.log('Operatives checked in:', data.value);
