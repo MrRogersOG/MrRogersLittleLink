@@ -539,9 +539,9 @@
                 console.log('📡 Trying CountAPI...');
                 countElement.textContent = 'Connecting...';
                 
-                // Add timeout for mobile devices
+                // Add timeout for faster mobile response
                 const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+                const timeoutId = setTimeout(() => controller.abort(), 1000); // 1 second timeout
                 
                 const response = await fetch('https://api.countapi.xyz/hit/mrrogersog.github.io/operatives', {
                     method: 'GET',
