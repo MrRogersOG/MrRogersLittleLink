@@ -119,32 +119,199 @@
             border: none !important;
         }
         
-        /* 2b2t Server Status Styling */
+        /* 2b2t Server Status Styling - Layered approach for crisp text */
         .server-status-container {
-            background: rgba(0, 0, 0, 0.8);
+            position: relative;
             border-radius: 0.5rem;
             padding: 1rem;
             margin-bottom: 1rem;
             text-align: center;
-            backdrop-filter: blur(10px);
+            background: transparent;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
+        /* Glass background layer for tracker */
+        .server-status-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px) saturate(1.2);
+            border-radius: inherit;
+            z-index: -1;
+        }
+        
         .status-indicator {
+            position: relative;
+            z-index: 1;
             font-size: 1.2em;
             font-weight: 700;
             margin-bottom: 0.5rem;
+            color: #ffffff;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
         }
         
         .status-details {
+            position: relative;
+            z-index: 1;
             font-size: 0.9em;
-            opacity: 0.8;
-            color: #cccccc;
+            color: #ffffff;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+        }
+        
+        /* Ensure all tracker text is crisp white */
+        .server-status-container * {
+            color: #ffffff !important;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9) !important;
+        }
+        
+        /* Strong shadows for main title and subtitle */
+        h1 {
+            text-shadow: 
+                0 2px 4px rgba(0, 0, 0, 0.9),
+                0 4px 8px rgba(0, 0, 0, 0.6),
+                0 8px 16px rgba(0, 0, 0, 0.3) !important;
+        }
+        
+        /* Enhanced shadow for TNT slogan */
+        h2 {
+            text-shadow: 
+                0 2px 4px rgba(0, 0, 0, 0.9),
+                0 4px 8px rgba(0, 0, 0, 0.6),
+                0 8px 16px rgba(0, 0, 0, 0.3) !important;
+        }
+        
+        /* Tagline shadow enhancement */
+        p {
+            text-shadow: 
+                0 1px 2px rgba(0, 0, 0, 0.9),
+                0 2px 4px rgba(0, 0, 0, 0.6) !important;
         }
         
         .status-online { color: #00ff00; }
         .status-offline { color: #ff4444; }
         .status-loading { color: #ffaa00; }
+        
+        /* Create glass background layer behind text */
+        .button,
+        .button-yt,
+        .button-default,
+        .button-substack,
+        .button-discord,
+        .button-mastodon,
+        a[class*="button"] {
+            position: relative !important;
+            background: transparent !important;
+            color: #ffffff !important;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9) !important;
+            z-index: 1 !important;
+        }
+        
+        /* Glass background layer - behind text */
+        .button::before,
+        .button-yt::before,
+        .button-default::before,
+        .button-substack::before,
+        .button-discord::before,
+        .button-mastodon::before,
+        a[class*="button"]::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(15px) saturate(1.2);
+            border-radius: inherit;
+            z-index: -2;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Colored overlay for button identity - behind text */
+        .button-yt::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 0, 0, 0.3);
+            border-radius: inherit;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .button-substack::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 108, 0, 0.3);
+            border-radius: inherit;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .button-discord::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(88, 101, 242, 0.3);
+            border-radius: inherit;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .button-mastodon::after,
+        .button-default::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(86, 118, 194, 0.3);
+            border-radius: inherit;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        /* Ensure all button text stays crisp and white */
+        .button *,
+        .button-yt *,
+        .button-default *,
+        .button-substack *,
+        .button-discord *,
+        .button-mastodon *,
+        a[class*="button"] * {
+            position: relative;
+            z-index: 2;
+            color: #ffffff !important;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9) !important;
+        }
+        
+        /* Hover effect for transparent buttons */
+        .button:hover,
+        .button-yt:hover,
+        .button-default:hover,
+        .button-substack:hover,
+        .button-discord:hover,
+        .button-mastodon:hover,
+        a[class*="button"]:hover {
+            opacity: 1 !important;
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
+        }
     </style>
 
     <!-- LittleLink Extended Stylesheet (Optional) -->
@@ -168,16 +335,7 @@
                 const response = await fetch('https://api.mcsrvstat.us/3/2b2t.org');
                 const data = await response.json();
                 
-                console.log('mcsrvstat API Response:', data); // Debug log to see all available data
-                
-                // Also try the official 2b2t.org API for additional data
-                try {
-                    const official2b2tResponse = await fetch('https://status.2b2t.org/public-api');
-                    const official2b2tData = await official2b2tResponse.json();
-                    console.log('Official 2b2t.org API Response:', official2b2tData);
-                } catch (officialApiError) {
-                    console.log('Official 2b2t API not available:', officialApiError.message);
-                }
+                console.log('2b2t API Response:', data); // Debug log to see all available data
                 
                 if (data.online) {
                     statusIcon.textContent = '🟢';
@@ -258,11 +416,49 @@
             }
         }
         
-        // Check status when page loads
-        document.addEventListener('DOMContentLoaded', check2b2tStatus);
+        // Real-time refresh variables
+        let refreshInterval;
+        let countdownInterval;
+        let secondsUntilRefresh = 30;
         
-        // Update status every 2 minutes
-        setInterval(check2b2tStatus, 120000);
+        // Countdown timer display
+        function updateCountdown() {
+            const countdownElement = document.getElementById('refresh-countdown');
+            if (countdownElement) {
+                countdownElement.textContent = `Next update: ${secondsUntilRefresh}s`;
+                secondsUntilRefresh--;
+                
+                if (secondsUntilRefresh < 0) {
+                    secondsUntilRefresh = 30; // Reset countdown
+                }
+            }
+        }
+        
+        // Start real-time monitoring
+        function startRealTimeUpdates() {
+            // Initial check
+            check2b2tStatus();
+            
+            // Update every 30 seconds (real-time)
+            refreshInterval = setInterval(() => {
+                check2b2tStatus();
+                secondsUntilRefresh = 30; // Reset countdown
+            }, 30000);
+            
+            // Update countdown every second
+            countdownInterval = setInterval(updateCountdown, 1000);
+        }
+        
+        // Manual refresh function
+        function manualRefresh() {
+            clearInterval(refreshInterval);
+            clearInterval(countdownInterval);
+            secondsUntilRefresh = 30;
+            startRealTimeUpdates();
+        }
+        
+        // Start when page loads
+        document.addEventListener('DOMContentLoaded', startRealTimeUpdates);
     </script>
 
     <div class="container">
@@ -297,6 +493,9 @@
                   <span id="status-text">Checking 2b2t status...</span>
                 </div>
                 <div id="status-details" class="status-details"></div>
+                <div class="status-controls" style="margin-top: 0.5rem; text-align: center; font-size: 0.8em;">
+                  <span id="refresh-countdown" style="display: none; opacity: 0.7;">Next update: 30s</span>
+                </div>
               </div>
 
               <!-- YouTube Channel -->
