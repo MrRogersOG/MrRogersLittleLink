@@ -191,6 +191,53 @@
                 0 2px 4px rgba(0, 0, 0, 0.6) !important;
         }
         
+        /* Visitor Counter Styling */
+        .visitor-counter {
+            position: relative;
+            background: transparent;
+            border-radius: 0.5rem;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            border: 1px solid rgba(255, 68, 68, 0.3);
+        }
+        
+        /* Glass background layer for visitor counter */
+        .visitor-counter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(15px) saturate(1.2);
+            border-radius: inherit;
+            z-index: -1;
+        }
+        
+        .visitor-counter-label {
+            position: relative;
+            z-index: 1;
+            font-size: 0.9em;
+            color: #ff4444;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+            font-family: 'Orbitron', 'Exo 2', monospace;
+        }
+        
+        .visitor-count {
+            position: relative;
+            z-index: 1;
+            font-size: 1.4em;
+            color: #ffffff;
+            font-weight: 700;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 0.1em;
+        }
+        
         .status-online { color: #00ff00; }
         .status-offline { color: #ff4444; }
         .status-loading { color: #ffaa00; }
@@ -457,8 +504,35 @@
             startRealTimeUpdates();
         }
         
+        // Visitor Counter Function
+        async function updateVisitorCount() {
+            try {
+                // CountAPI endpoint - creates/increments counter for your domain
+                const response = await fetch('https://api.countapi.xyz/hit/mrrogersog.github.io/operatives');
+                const data = await response.json();
+                
+                const countElement = document.getElementById('visitor-count');
+                if (countElement && data.value) {
+                    // Format number with commas for readability
+                    const formattedCount = data.value.toLocaleString();
+                    countElement.textContent = formattedCount;
+                }
+                
+                console.log('Operatives checked in:', data.value);
+            } catch (error) {
+                console.error('Error updating visitor count:', error);
+                const countElement = document.getElementById('visitor-count');
+                if (countElement) {
+                    countElement.textContent = '---';
+                }
+            }
+        }
+        
         // Start when page loads
-        document.addEventListener('DOMContentLoaded', startRealTimeUpdates);
+        document.addEventListener('DOMContentLoaded', () => {
+            startRealTimeUpdates();
+            updateVisitorCount();
+        });
     </script>
 
     <div class="container">
@@ -555,6 +629,11 @@
                 <div class="button-description">Documented evidence of Spawnmason misconduct</div>
               </a>
 
+              <!-- Visitor Counter -->
+              <div class="visitor-counter">
+                <div class="visitor-counter-label">🎯 OPERATIVES CHECKED IN</div>
+                <div class="visitor-count" id="visitor-count">Loading...</div>
+              </div>
 
       </div>
 
