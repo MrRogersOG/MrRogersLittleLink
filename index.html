@@ -72,13 +72,12 @@
         /* Fix mobile background scrolling issue */
         @media (max-width: 768px) {
             body::before {
-                background-attachment: scroll;
-                position: absolute;
-                height: 100vh;
-            }
-            
-            body {
-                position: relative;
+                background-attachment: fixed;
+                position: fixed;
+                height: 100%;
+                transform: translateZ(0);
+                -webkit-transform: translateZ(0);
+                will-change: transform;
             }
         }
         
