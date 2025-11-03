@@ -153,58 +153,139 @@
         
         .typewriter {
             overflow: hidden;
-            border-right: 3px solid #00ff00;
             white-space: nowrap;
             margin: 0 auto;
             letter-spacing: 0.05em;
-            animation: typing-name 2s steps(10, end), blink-cursor 0.75s step-end infinite;
+            width: 0;
+            animation: 
+                typing-name 2s steps(11, end) forwards;
+            border-right: 3px solid transparent;
         }
         
-        .typewriter-notice {
+        .typewriter-notice-line1 {
             overflow: hidden;
-            border-right: 3px solid #ff0000;
             white-space: nowrap;
             margin: 0 auto;
             letter-spacing: 0.05em;
-            animation: typing-notice 3s steps(30, end) 3s, blink-cursor-red 0.75s step-end infinite 3s;
+            width: 0;
             opacity: 0;
+            animation: 
+                typing-notice-line1 2.5s steps(42, end) 3s forwards;
             animation-fill-mode: forwards;
+            border-right: 3px solid transparent;
         }
         
-        .typewriter-tagline {
+        .typewriter-notice-line2 {
             overflow: hidden;
-            border-right: 3px solid #00ff00;
             white-space: nowrap;
             margin: 0 auto;
             letter-spacing: 0.02em;
-            animation: typing-tagline 4s steps(80, end) 7s, blink-cursor 0.75s step-end infinite 7s;
+            width: 0;
             opacity: 0;
+            animation: 
+                typing-notice-line2 2s steps(30, end) 6s forwards;
             animation-fill-mode: forwards;
+            border-right: 3px solid transparent;
+        }
+        
+        .typewriter-notice-line3 {
+            overflow: hidden;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 0.02em;
+            width: 0;
+            opacity: 0;
+            animation: 
+                typing-notice-line3 6s steps(96, end) 8.5s forwards,
+                blink-cursor-red-final 0.75s step-end infinite 14.5s;
+            animation-fill-mode: forwards;
+            border-right: 3px solid transparent;
         }
         
         @keyframes typing-name {
-            from { width: 0; opacity: 1; }
-            to { width: 100%; opacity: 1; }
+            0% { 
+                width: 0; 
+                opacity: 1; 
+                border-right: 3px solid #00ff00;
+            }
+            95% { 
+                width: 11ch; 
+                opacity: 1; 
+                border-right: 3px solid #00ff00;
+            }
+            100% { 
+                width: 11ch; 
+                opacity: 1; 
+                border-right: 3px solid transparent;
+            }
         }
         
-        @keyframes typing-notice {
-            from { width: 0; opacity: 1; }
-            to { width: 100%; opacity: 1; }
+        @keyframes typing-notice-line1 {
+            0% { 
+                width: 0; 
+                opacity: 1; 
+                border-right: 3px solid #ff0000;
+            }
+            95% { 
+                width: 42ch; 
+                opacity: 1; 
+                border-right: 3px solid #ff0000;
+            }
+            100% { 
+                width: 42ch; 
+                opacity: 1; 
+                border-right: 3px solid transparent;
+            }
         }
         
-        @keyframes typing-tagline {
-            from { width: 0; opacity: 1; }
-            to { width: 100%; opacity: 1; }
+        @keyframes typing-notice-line2 {
+            0% { 
+                width: 0; 
+                opacity: 1; 
+                border-right: 3px solid #ff0000;
+            }
+            95% { 
+                width: 30ch; 
+                opacity: 1; 
+                border-right: 3px solid #ff0000;
+            }
+            100% { 
+                width: 30ch; 
+                opacity: 1; 
+                border-right: 3px solid transparent;
+            }
         }
         
-        @keyframes blink-cursor {
-            from, to { border-color: transparent; }
-            50% { border-color: #00ff00; }
+        @keyframes typing-notice-line3 {
+            0% { 
+                width: 0; 
+                opacity: 1; 
+                border-right: 3px solid #ff0000;
+            }
+            95% { 
+                width: 96ch; 
+                opacity: 1; 
+                border-right: 3px solid #ff0000;
+            }
+            100% { 
+                width: 96ch; 
+                opacity: 1; 
+                border-right: 3px solid #ff0000;
+            }
         }
         
-        @keyframes blink-cursor-red {
-            from, to { border-color: transparent; }
-            50% { border-color: #ff0000; }
+        @keyframes blink-cursor-green {
+            from, to { border-right-color: transparent; }
+            50% { border-right-color: #00ff00; }
+        }
+        
+        @keyframes hide-cursor {
+            to { border-right: 3px solid transparent; }
+        }
+        
+        @keyframes blink-cursor-red-final {
+            from, to { border-right-color: transparent; }
+            50% { border-right-color: #ff0000; }
         }
         
         /* OPERATIVE PROFILE SECTION */
@@ -1175,18 +1256,18 @@
                 TNT INTELLIGENCE HUB - COMMAND CENTER
             </div>
             <div class="terminal-content">
-                <!-- FLASHING NOTICE BANNER -->
-                <div class="notice-banner">
-                    <div class="typewriter-notice">⚠️ NOTICE: UNCLASSIFIED OPERATION ⚠️</div>
-                    <div class="notice-content typewriter-tagline">
-                        The Next Thing: 67th Incursion<br>
-                        "Every 30 seconds, a new player dies on the oldest <span style="text-decoration: line-through;">anarchy</span> preservation server in Minecraft"
-                    </div>
-                </div>
-                
                 <div class="operative-profile">
                     <img class="avatar" src="images/mrrogersog.png" alt="MrRogersOG - Operative">
                     <h1 class="typewriter">MrRogersOG</h1>
+                </div>
+                
+                <!-- FLASHING NOTICE BANNER -->
+                <div class="notice-banner">
+                    <div class="typewriter-notice-line1">⚠️ NOTICE: UNCLASSIFIED OPERATION ⚠️</div>
+                    <div class="notice-content">
+                        <div class="typewriter-notice-line2">The Next Thing: 67th Incursion</div>
+                        <div class="typewriter-notice-line3">"Every 30 seconds, a new player dies on the oldest <span style="text-decoration: line-through;">anarchy</span> preservation server in Minecraft"</div>
+                    </div>
                 </div>
                 
                 <div class="status-bar">
