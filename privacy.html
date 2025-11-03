@@ -1,84 +1,407 @@
 <!DOCTYPE html>
+<html class="theme-dark" lang="en">
 
-<!--
-  To change the theme, change the class on the html tag below to one of:
-  - theme-auto: Automatically switches based on user's system preferences
-  - theme-light: Forces light theme
-  - theme-dark: Forces dark theme
--->
-
-<html class="theme-auto" lang="en"> <!-- Update `class="theme-auto"` with your preference -->
-
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>TNT OPERATIONAL SECURITY NOTICE | MrRogersOG</title>
+    <link rel="icon" type="image/x-icon" href="/images/avatar.png">
+    
+    <meta name="description" content="TNT Intelligence Hub - Operational Security and Data Protection Notice">
+    <meta name="robots" content="noindex">
+    
+    <!-- Retro Terminal Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Inconsolata:wght@200..900&family=IBM+Plex+Mono:ital,wght@0,100..700;1,100..700&family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #000000;
+            color: #00ff00;
+            font-family: 'VT323', 'Share Tech Mono', 'Courier Prime', monospace;
+            font-size: 18px;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Matrix rain effect background */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.3;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Terminal window effect */
+        .terminal-window {
+            background: rgba(0, 0, 0, 0.95);
+            border: 2px solid #00ff00;
+            border-radius: 8px;
+            box-shadow: 
+                0 0 20px #00ff00,
+                inset 0 0 20px rgba(0, 255, 0, 0.1);
+            margin: 20px 0;
+            overflow: hidden;
+            position: relative;
+            z-index: 3;
+        }
+        
+        .terminal-header {
+            background: #00ff00;
+            color: #000000;
+            padding: 8px 15px;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .terminal-header::before {
+            content: "●●●";
+            letter-spacing: 3px;
+        }
+        
+        .terminal-content {
+            padding: 20px;
+        }
+        
+        h1, h2, h3 {
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+            margin-bottom: 15px;
+            letter-spacing: 0.05em;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 30px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        h2 {
+            font-size: 1.8em;
+            border-bottom: 1px solid #00ff00;
+            padding-bottom: 10px;
+        }
+        
+        h3 {
+            font-size: 1.4em;
+            color: #00cc00;
+        }
+        
+        p, li {
+            text-shadow: 0 0 5px #00ff00;
+            margin-bottom: 15px;
+        }
+        
+        .nav-link {
+            color: #00ff00;
+            text-decoration: none;
+            font-size: 1.2em;
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            border: 1px solid #00ff00;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background: #00ff00;
+            color: #000000;
+            box-shadow: 0 0 15px #00ff00;
+        }
+        
+        .status-bar {
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid #00ff00;
+            padding: 10px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        
+        .classified-notice {
+            background: rgba(255, 0, 0, 0.1);
+            border: 2px solid #ff0000;
+            color: #ff4444;
+            text-shadow: 0 0 8px #ff4444;
+            padding: 15px;
+            margin: 20px 0;
+            animation: blink 1.5s infinite;
+        }
+        
+        ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+        
+        ul li::before {
+            content: "> ";
+            color: #00ff00;
+            font-weight: bold;
+        }
+        
+        .data-stream {
+            font-family: 'IBM Plex Mono', monospace;
+            background: rgba(0, 255, 0, 0.05);
+            border-left: 3px solid #00ff00;
+            padding: 10px 15px;
+            margin: 15px 0;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #00ff00; }
+            to { text-shadow: 0 0 20px #00ff00, 0 0 30px #00ff00; }
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.5; }
+        }
+        
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: 2px solid #00ff00;
+            white-space: nowrap;
+            animation: typewriter 2s steps(40) 1s both, blink-cursor 0.8s infinite;
+        }
+        
+        @keyframes blink-cursor {
+            0%, 50% { border-color: #00ff00; }
+            51%, 100% { border-color: transparent; }
+        }
+    </style>
+</head>
 
-    <!-- Page Title - Change this to your name/brand (50-60 characters recommended) -->
-    <title>Privacy Policy | LittleLink</title>
-    <link rel="icon" type="image/x-icon" href="/images/avatar.png"> <!-- Update this with your own favicon -->
-
-
-    <!-- Meta Description - Write a description (150-160 characters recommended) -->
-    <meta name="description" content="Privacy policy and data collection information for LittleLink">
-    <meta name="robots" content="noindex"> <!-- Since this is a utility page -->
-
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/brands.css">
-
-  </head>
-
-  <body>
-    <div class="container-left" role="main">
-      <div class="column">
-        <nav role="navigation">
-          <a href="index.html" aria-label="Back to homepage">← Back to main page</a>
+<body>
+    <canvas class="matrix-bg" id="matrix"></canvas>
+    
+    <div class="container">
+        <nav>
+            <a href="index.html" class="nav-link">← RETURN TO COMMAND CENTER</a>
         </nav>
 
-        <h1>Privacy Overview</h1>
+        <div class="terminal-window">
+            <div class="terminal-header">
+                TNT INTELLIGENCE HUB - SECURE TERMINAL
+            </div>
+            <div class="terminal-content">
+                <h1 class="typewriter">OPERATIONAL SECURITY NOTICE</h1>
+                
+                <div class="classified-notice">
+                    <strong>⚠️ NOTICE: UNCLASSIFIED OPERATION ⚠️</strong><br>
+                    TNT Intelligence Hub - No Surveillance Zone
+                </div>
+                
+                <div class="status-bar">
+                    STATUS: OPERATIONAL | SECURITY LEVEL: GREEN | SURVEILLANCE: DISABLED
+                </div>
+            </div>
+        </div>
 
-        <section aria-labelledby="analytics-heading">
-          <h2 id="analytics-heading">Analytics</h2>
-          <p>The services contained in this section enable the Owner to monitor and analyze web traffic and can be used to keep track of User behavior.</p>
+        <div class="terminal-window">
+            <div class="terminal-header">
+                DATA COLLECTION PROTOCOL
+            </div>
+            <div class="terminal-content">
+                <h2>INTELLIGENCE GATHERING OPERATIONS</h2>
+                
+                <h3>OPERATIVE COUNTER SYSTEM</h3>
+                <div class="data-stream">
+                    SYSTEM: CountAPI.xyz<br>
+                    PURPOSE: Track operative check-ins to intelligence hub<br>
+                    DATA STORED: Visit count only - NO personal identification<br>
+                    RETENTION: Persistent counter - No individual tracking
+                </div>
+                
+                <h3>THIRD-PARTY ASSETS</h3>
+                <ul>
+                    <li>Google Fonts: Terminal typography rendering</li>
+                    <li>CountAPI: Anonymous visit counter service</li>
+                    <li>GitHub Pages: Static hosting infrastructure</li>
+                </ul>
+                
+                <h3>SURVEILLANCE STATUS</h3>
+                <div class="data-stream">
+                    COOKIES: None deployed<br>
+                    TRACKING: Disabled<br>
+                    PERSONAL DATA: Not collected<br>
+                    IP LOGGING: Not performed by this system
+                </div>
+            </div>
+        </div>
 
-          <h3>Example LLC</h3>
-          <ul role="list">
-            <li>Personal Data: various types of Data as specified in the privacy policy of the service</li>
-            <li><a href="https://example.com/privacy/" target="_blank" rel="noopener">Privacy Policy</a></li>
-          </ul>
-        </section>
+        <div class="terminal-window">
+            <div class="terminal-header">
+                OPERATIVE RIGHTS & PROCEDURES
+            </div>
+            <div class="terminal-content">
+                <h2>OPERATIONAL PROTOCOLS</h2>
+                
+                <h3>CLEAN OPERATIONS GUARANTEE</h3>
+                <p>This intelligence hub operates under strict no-surveillance protocols:</p>
+                <ul>
+                    <li>No personal data harvesting</li>
+                    <li>No behavioral tracking systems</li>
+                    <li>No cross-site surveillance</li>
+                    <li>Anonymous operative counter only</li>
+                </ul>
+                
+                <h3>DATA PROCESSING SCOPE</h3>
+                <div class="data-stream">
+                    COLLECTED: Page visit increment (+1)<br>
+                    PURPOSE: Display total operative check-ins<br>
+                    LEGAL BASIS: Legitimate interest (site statistics)<br>
+                    SHARING: Public counter display only
+                </div>
+                
+                <h3>OPERATIVE CONTACT PROTOCOLS</h3>
+                <p>For operational security inquiries or data requests:</p>
+                <div class="data-stream">
+                    CONTACT: Through official TNT communication channels<br>
+                    RESPONSE TIME: 72-hour operational window<br>
+                    CLASSIFICATION: Unclassified communications only
+                </div>
+            </div>
+        </div>
 
-        <section aria-labelledby="external-content-heading">
-          <h2 id="external-content-heading">External Content</h2>
-          <p>This type of service allows you to view content hosted on external platforms directly from the pages of this website and interact with them.</p>
-          <p>This type of service might still collect web traffic data for the pages where the service is installed, even when Users do not use it.</p>
+        <div class="terminal-window">
+            <div class="terminal-header">
+                TECHNICAL SPECIFICATIONS
+            </div>
+            <div class="terminal-content">
+                <h2>SYSTEM ARCHITECTURE</h2>
+                
+                <h3>COUNTER API INTEGRATION</h3>
+                <div class="data-stream">
+                    ENDPOINT: api.countapi.xyz/hit/mrrogersog.github.io/operatives<br>
+                    METHOD: Increment on page load<br>
+                    STORAGE: External API servers<br>
+                    ACCESS: Public read, auto-increment write
+                </div>
+                
+                <h3>SECURITY MEASURES</h3>
+                <ul>
+                    <li>Static site deployment - No server-side data processing</li>
+                    <li>HTTPS encryption for all communications</li>
+                    <li>No database connections or user sessions</li>
+                    <li>Client-side only JavaScript execution</li>
+                </ul>
+                
+                <h3>COMPLIANCE STATUS</h3>
+                <div class="data-stream">
+                    GDPR: Compliant (no personal data processing)<br>
+                    CCPA: N/A (no personal information collection)<br>
+                    COPPA: Compliant (no data collection from minors)<br>
+                    OPERATIONAL CLASSIFICATION: Public/Unclassified
+                </div>
+            </div>
+        </div>
 
-          <h3>Example LLC</h3>
-          <ul role="list">
-            <li>Personal Data: Usage Data; various types of Data as specified in the privacy policy of the service</li>
-            <li><a href="https://example.com/privacy/" target="_blank" rel="noopener">Privacy Policy</a></li>
-          </ul>
-        </section>
-
-        <section aria-labelledby="hosting-heading">
-          <h2 id="hosting-heading">Hosting and Infrastructure</h2>
-          <p>This type of service has the purpose of hosting Data and files that enable this website to exist.</p>
-          <p>Some services among those listed below, if any, may work through geographically distributed servers, making it difficult to determine the actual location where the Personal Data are stored.</p>
-
-          <h3>Example LLC</h3>
-          <ul role="list">
-            <li>Personal Data: various types of Data as specified in the privacy policy of the service</li>
-            <li><a href="https://example.com/privacy" target="_blank" rel="noopener">Privacy Policy</a></li>
-          </ul>
-        </section>
-
-        <footer>
-          <p>Build your own by forking <a href="https://littlelink.io" target="_blank" rel="noopener">LittleLink.</a></p>
-        </footer>
-      </div>
+        <div class="terminal-window">
+            <div class="terminal-header">
+                POLICY UPDATES & MODIFICATIONS
+            </div>
+            <div class="terminal-content">
+                <h2>REVISION CONTROL</h2>
+                
+                <div class="data-stream">
+                    LAST UPDATED: November 3, 2025<br>
+                    VERSION: 2.0 - TERMINAL PROTOCOL<br>
+                    NEXT REVIEW: As operationally required<br>
+                    NOTIFICATION: Updates posted to main intelligence hub
+                </div>
+                
+                <p>This operational security notice may be updated to reflect changes in TNT intelligence gathering procedures. Operatives will be notified of significant changes through the main command center.</p>
+                
+                <div class="status-bar">
+                    END OF TRANSMISSION | TNT OPERATIONAL SECURITY | 67TH INCURSION
+                </div>
+            </div>
+        </div>
     </div>
 
-  </body>
-
+    <script>
+        // Matrix rain effect
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const matrix = "TNTABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()67INCURSION";
+        const matrixArray = matrix.split("");
+        
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        
+        const drops = [];
+        for(let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+        
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#00FF00';
+            ctx.font = fontSize + 'px VT323, monospace';
+            
+            for(let i = 0; i < drops.length; i++) {
+                const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                
+                if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        
+        setInterval(drawMatrix, 35);
+        
+        // Resize handler
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+        
+        // Terminal boot sequence
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                console.log('%cTNT INTELLIGENCE HUB ACCESSED', 'color: #00ff00; font-size: 16px; font-family: monospace;');
+                console.log('%cOPERATIONAL SECURITY: ACTIVE', 'color: #00ff00; font-size: 12px; font-family: monospace;');
+                console.log('%c67TH INCURSION PROTOCOLS LOADED', 'color: #00ff00; font-size: 12px; font-family: monospace;');
+            }, 1000);
+        });
+    </script>
+</body>
 </html>
