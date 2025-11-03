@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 
 <!--
-  TNT INTELLIGENCE HUB - TACTICAL TERMINAL INTERFACE
-  The Next Thing: 67th Incursion Command Center
-  Operational Status: ACTIVE | Security Level: GREEN
+  To change the theme, change the class on the html tag below to one of:
+  - theme-auto: Automatically switches based on user's system preferences
+  - theme-light: Forces light theme
+  - theme-dark: Forces dark theme
 -->
 
-<html class="theme-dark" lang="en"> <!-- TACTICAL DARK MODE ENGAGED -->
+<html class="theme-auto" lang="en"> <!-- Update`class="theme-auto" with your preference -->
 
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- TACTICAL INTERFACE DESIGNATION -->
-    <title>TNT INTELLIGENCE HUB | MrRogersOG - Command Center</title>
-    <link rel="icon" type="image/x-icon" href="/images/avatar.png"> <!-- OPERATIVE IDENTIFICATION BADGE -->
+    <!-- Page Title - Change this to your name/brand (50-60 characters recommended) -->
+    <title>MrRogersOG - Links</title>
+    <link rel="icon" type="image/x-icon" href="/images/avatar.png"> <!-- Update this with your own favicon -->
 
-    <!-- OPERATIONAL DESCRIPTION -->
-    <meta name="description" content="TNT Intelligence Hub - The Next Thing: 67th Incursion Command Center. Tactical links and real-time 2b2t monitoring.">
+    <!-- Meta Description - Write a description (150-160 characters recommended) -->
+    <meta name="description" content="MrRogersOG - Sharing insights on technology, gaming, and more. Find all my links here.">
 
     <!-- Keywords -->
     <meta name="keywords" content="MrRogersOG, technology, Gaming, Minecraft, Madden, YouTube, Substack, Odysee">
@@ -40,205 +41,147 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Inconsolata:wght@200..900&family=IBM+Plex+Mono:ital,wght@0,100..700;1,100..700&family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
-    <!-- TACTICAL TERMINAL INTERFACE STYLES -->
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/brands.css">
+    
+    <!-- Custom TNT Background Styles -->
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
         body {
-            background: #000000;
-            color: #00ff00;
-            font-family: 'VT323', 'Share Tech Mono', 'Courier Prime', monospace;
-            font-size: 18px;
-            line-height: 1.6;
-            overflow-x: hidden;
             position: relative;
         }
         
-        /* Matrix rain effect background */
-        .matrix-bg {
+        body::before {
+            content: '';
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            background-image: url('images/TNT.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center center;
+            opacity: 0.6;
+            z-index: -1;
             pointer-events: none;
-            z-index: 0;
-            opacity: 0.3;
+        }
+        
+        /* Enhanced mobile background stability */
+        @media (max-width: 768px) {
+            body::before {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                transform: translate3d(0, 0, 0);
+                -webkit-transform: translate3d(0, 0, 0);
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+                will-change: auto;
+            }
         }
         
         .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
             position: relative;
-            z-index: 2;
+            z-index: 1;
         }
         
-        /* Terminal window effect */
-        .terminal-window {
-            background: rgba(0, 0, 0, 0.95);
-            border: 2px solid #00ff00;
-            border-radius: 8px;
-            box-shadow: 
-                0 0 20px #00ff00,
-                inset 0 0 20px rgba(0, 255, 0, 0.1);
-            margin: 20px 0;
-            overflow: hidden;
-            position: relative;
-            z-index: 3;
-        }
+
         
-        .terminal-header {
-            background: #00ff00;
-            color: #000000;
-            padding: 8px 15px;
-            font-size: 14px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .terminal-header::before {
-            content: "●●●";
-            letter-spacing: 3px;
-        }
-        
-        .terminal-content {
-            padding: 20px;
-        }
-        
-        
-        /* OPERATIVE PROFILE SECTION */
-        .operative-profile {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 3px solid #00ff00;
-            box-shadow: 0 0 30px #00ff00;
-            margin-bottom: 20px;
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-        
-        h1, h2, h3 {
-            color: #00ff00;
-            text-shadow: 0 0 10px #00ff00;
-            margin-bottom: 15px;
-            letter-spacing: 0.05em;
-        }
-        
-        h1 {
-            font-size: 2.5em;
-            text-align: center;
-            margin-bottom: 30px;
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-        
-        h2 {
-            font-size: 1.8em;
-            border-bottom: 1px solid #00ff00;
-            padding-bottom: 10px;
-        }
-        
-        h3 {
-            font-size: 1.4em;
-            color: #00cc00;
-        }
-        
-        .tagline {
-            font-style: italic;
-            font-size: 0.9em;
-            opacity: 0.8;
-            margin-bottom: 20px;
-            color: #88ff88;
-        }
-        
-        /* TACTICAL BUTTON STYLING */
-        .button-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin: 20px 0;
-        }
-        
-        .button,
-        a.button {
-            background: rgba(0, 255, 0, 0.1) !important;
-            border: 2px solid #00ff00 !important;
-            color: #00ff00 !important;
-            font-family: 'VT323', 'Share Tech Mono', monospace !important;
-            font-size: 1.2rem !important;
-            font-weight: 400 !important;
-            letter-spacing: 0.05em !important;
-            padding: 12px 20px !important;
-            text-decoration: none !important;
-            text-align: center !important;
-            display: block !important;
-            transition: all 0.3s ease !important;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3) !important;
-            text-shadow: 0 0 5px #00ff00 !important;
-            border-radius: 4px !important;
-        }
-        
-        .button:hover,
-        a.button:hover {
-            background: rgba(0, 255, 0, 0.2) !important;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.6) !important;
-            transform: translateY(-2px) !important;
-            text-shadow: 0 0 15px #00ff00 !important;
-        }
-        
-        /* Button descriptions */
+        /* Custom button styling for descriptions - Override LittleLink defaults */
         .button-with-description {
-            display: flex !important;
+            display: inline-flex !important;
             flex-direction: column !important;
             align-items: center !important;
+            justify-content: center !important;
+            text-align: center !important;
+            padding: 0.75rem 1rem !important;
         }
         
+        /* Container for icon and title on same line */
         .button-title-row {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
             margin-bottom: 4px;
         }
         
-        .button-description {
-            font-size: 0.8rem;
-            opacity: 0.7;
-            margin-top: 4px;
+        .button-title {
+            font-weight: 700;
+            font-size: 1.125rem;
+            text-align: center;
+            margin: 0;
         }
         
-        /* 2B2T SERVER STATUS - TACTICAL STYLING */
+        .button-description {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            line-height: 1.2;
+            text-align: center;
+            width: 100%;
+            font-weight: 400;
+        }
+        
+        /* Icon inline with title */
+        .button-with-description .icon {
+            margin-bottom: 0 !important;
+            margin-right: 0 !important;
+        }
+        
+        /* Remove all button borders for consistent clean look */
+        .button-yt,
+        .button-default,
+        .button,
+        button {
+            --button-border: none !important;
+            border: none !important;
+        }
+        
+        /* 2b2t Server Status Styling - Layered approach for crisp text */
         .server-status-container {
-            background: rgba(0, 255, 0, 0.05);
-            border: 2px solid #00ff00;
-            border-radius: 8px;
-            padding: 15px;
-            margin: 20px 0;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+            position: relative;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Glass background layer for tracker */
+        .server-status-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px) saturate(1.2);
+            border-radius: inherit;
+            z-index: -1;
         }
         
         .status-indicator {
+            position: relative;
+            z-index: 1;
             font-size: 1.2em;
             font-weight: 700;
             margin-bottom: 0.5rem;
-            color: #00ff00;
-            text-shadow: 0 0 10px #00ff00;
+            color: #ffffff;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
         }
         
         .status-details {
+            position: relative;
+            z-index: 1;
             font-size: 0.9em;
-            color: #00ff00;
-            text-shadow: 0 0 5px #00ff00;
+            color: #ffffff;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
         }
         
         /* Ensure all tracker text is crisp white */
@@ -881,59 +824,50 @@
     </script>
 
     <div class="container">
-        <!-- OPERATIVE IDENTIFICATION TERMINAL -->
-        <div class="terminal-window">
-            <div class="terminal-header">
-                TNT INTELLIGENCE HUB - COMMAND CENTER
-            </div>
-            <div class="terminal-content">
-                <div class="operative-profile">
-                    <img class="avatar" src="images/mrrogersog.png" alt="MrRogersOG - Operative">
-                    <h1 class="typewriter">MrRogersOG</h1>
-                    <h2>The Next Thing: 67th Incursion</h2>
-                    <p class="tagline">"Every 30 seconds, a new player dies on the oldest <span style="text-decoration: line-through;">anarchy</span> preservation server in Minecraft"</p>
-                </div>
-                
-                <div class="status-bar">
-                    STATUS: OPERATIONAL | SECURITY LEVEL: GREEN | NETWORKS: ACTIVE
-                </div>
-            </div>
-        </div>
+        <div class="column">
 
-        <!-- 2B2T TACTICAL MONITORING STATION -->
-        <div class="terminal-window">
-            <div class="terminal-header">
-                2B2T SURVEILLANCE NETWORK
-            </div>
-            <div class="terminal-content">
-                <div id="server-status" class="server-status-container">
-                    <div class="status-indicator">
-                        <span id="status-icon">🔄</span>
-                        <span id="status-text">Scanning 2b2t network...</span>
-                    </div>
-                    <div id="status-details" class="status-details"></div>
-                    <div class="status-controls" style="margin-top: 0.5rem; text-align: center; font-size: 0.8em;">
-                        <span id="refresh-countdown" style="display: none; opacity: 0.7;">Next scan: 30s</span>
-                    </div>
+            <!--
+              By default, the Avatar is rounded. Use the following:
+              - avatar--rounded: Automatically rounds the image
+              - avatar--soft: Slightly rounds the image
+              - avatar--none: Removes any rounding
+
+              Be sure to replace the src with your own image path and update the alt text
+            -->
+            <img class="avatar avatar--rounded" src="images/mrrogersog.png" alt="MrRogersOG">
+
+            <!-- Replace with your name or brand -->
+            <h1>
+              <div>MrRogersOG</div>
+            </h1>
+
+            <!-- TNT Slogan and Tagline -->
+            <h2 style="font-family: 'VT323', 'Share Tech Mono', 'Courier Prime', 'Anonymous Pro', monospace; font-weight: 400; font-size: 1.4em; color: #00ff00; text-shadow: 0 0 10px #00ff00, 2px 2px 4px rgba(0,0,0,0.8); margin: 10px 0; letter-spacing: 0.05em;">The Next Thing: 6 7 Incursion</h2>
+            <p style="font-style: italic; font-size: 0.9em; opacity: 0.8;">"Every 30 seconds, a new player dies on the oldest <span style="text-decoration: line-through;">anarchy</span> preservation server in Minecraft"</p>
+
+            <!-- All your buttons go here -->
+            <div class="button-stack" role="navigation">
+
+              <!-- 2b2t Server Status -->
+              <div id="server-status" class="server-status-container">
+                <div class="status-indicator">
+                  <span id="status-icon">🔄</span>
+                  <span id="status-text">Checking 2b2t status...</span>
                 </div>
-            </div>
-        </div>
+                <div id="status-details" class="status-details"></div>
+                <div class="status-controls" style="margin-top: 0.5rem; text-align: center; font-size: 0.8em;">
+                  <span id="refresh-countdown" style="display: none; opacity: 0.7;">Next update: 30s</span>
+                </div>
+              </div>
 
-        <!-- COMMUNICATION NETWORKS TERMINAL -->
-        <div class="terminal-window">
-            <div class="terminal-header">
-                SECURE COMMUNICATION CHANNELS
-            </div>
-            <div class="terminal-content">
-                <div class="button-stack" role="navigation">
-
-                  <!-- YouTube Channel -->
-                  <a class="button button-yt button-with-description" href="https://www.youtube.com/@MrRogersOG" target="_blank" rel="noopener" role="button">
-                    <div class="button-title-row">
-                      <span class="button-title">🎬 MADDEN FILM ROOM</span>
-                    </div>
-                    <div class="button-description">Tactical Analysis & Trolling Operations</div>
-                  </a>
+              <!-- YouTube Channel -->
+              <a class="button button-yt button-with-description" href="https://www.youtube.com/@MrRogersOG" target="_blank" rel="noopener" role="button">
+                <div class="button-title-row">
+                  <img class="icon" aria-hidden="true" src="images/icons/youtube.svg" alt="YouTube Logo">
+                  <div class="button-title">Madden Film Room</div>
+                </div>
+                <div class="button-description">Madden Strategy, Analysis, Exposés and Trolling</div>
+              </a>
 
               <!-- Substack Newsletter -->
               <a class="button button-substack button-with-description" href="https://blocktheory.substack.com/" target="_blank" rel="noopener" role="button">
