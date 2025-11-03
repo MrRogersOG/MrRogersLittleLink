@@ -112,6 +112,100 @@
             padding: 20px;
         }
         
+        /* FLASHING NOTICE BANNER */
+        .notice-banner {
+            background: rgba(255, 0, 0, 0.9);
+            border: 2px solid #ff0000;
+            color: #ffffff;
+            padding: 10px 15px;
+            margin: 10px 0 30px 0;
+            text-align: center;
+            font-family: 'VT323', monospace;
+            font-size: 1.1rem;
+            font-weight: bold;
+            letter-spacing: 0.05em;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+            animation: flashWarning 2s infinite;
+            border-radius: 4px;
+        }
+        
+        @keyframes flashWarning {
+            0%, 50% { 
+                opacity: 1; 
+                box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+            }
+            25%, 75% { 
+                opacity: 0.7; 
+                box-shadow: 0 0 25px rgba(255, 0, 0, 0.9);
+            }
+        }
+        
+        .notice-content {
+            margin-top: 8px;
+            font-size: 0.95rem;
+            font-weight: normal;
+        }
+        
+        /* SEQUENTIAL TYPEWRITER EFFECTS */
+        .typewriter-sequence {
+            overflow: hidden;
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: 3px solid #00ff00;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 0.05em;
+            animation: typing-name 2s steps(10, end), blink-cursor 0.75s step-end infinite;
+        }
+        
+        .typewriter-notice {
+            overflow: hidden;
+            border-right: 3px solid #ff0000;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 0.05em;
+            animation: typing-notice 3s steps(30, end) 3s, blink-cursor-red 0.75s step-end infinite 3s;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+        
+        .typewriter-tagline {
+            overflow: hidden;
+            border-right: 3px solid #00ff00;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 0.02em;
+            animation: typing-tagline 4s steps(80, end) 7s, blink-cursor 0.75s step-end infinite 7s;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+        
+        @keyframes typing-name {
+            from { width: 0; opacity: 1; }
+            to { width: 100%; opacity: 1; }
+        }
+        
+        @keyframes typing-notice {
+            from { width: 0; opacity: 1; }
+            to { width: 100%; opacity: 1; }
+        }
+        
+        @keyframes typing-tagline {
+            from { width: 0; opacity: 1; }
+            to { width: 100%; opacity: 1; }
+        }
+        
+        @keyframes blink-cursor {
+            from, to { border-color: transparent; }
+            50% { border-color: #00ff00; }
+        }
+        
+        @keyframes blink-cursor-red {
+            from, to { border-color: transparent; }
+            50% { border-color: #ff0000; }
+        }
         
         /* OPERATIVE PROFILE SECTION */
         .operative-profile {
@@ -162,17 +256,19 @@
             color: #88ff88;
         }
         
-        /* TACTICAL BUTTON STYLING */
+        /* ENHANCED TACTICAL BUTTON STYLING WITH GLASSMORPHISM */
         .button-stack {
             display: flex;
             flex-direction: column;
             gap: 15px;
-            margin: 20px 0;
+            margin: 20px auto;
+            max-width: 400px; /* Smaller button width */
         }
         
         .button,
         a.button {
-            background: rgba(0, 255, 0, 0.1) !important;
+            position: relative !important;
+            background: transparent !important;
             border: 2px solid #00ff00 !important;
             color: #00ff00 !important;
             font-family: 'VT323', 'Share Tech Mono', monospace !important;
@@ -186,15 +282,207 @@
             transition: all 0.3s ease !important;
             box-shadow: 0 0 10px rgba(0, 255, 0, 0.3) !important;
             text-shadow: 0 0 5px #00ff00 !important;
-            border-radius: 4px !important;
+            border-radius: 8px !important;
+            z-index: 1 !important;
         }
         
+        /* Frosted Glass Background Layer */
+        .button::before,
+        a.button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(15px) saturate(1.2);
+            border-radius: inherit;
+            z-index: -2;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Button Color Overlay */
+        .button::after,
+        a.button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 255, 0, 0.1);
+            border-radius: inherit;
+            pointer-events: none;
+            z-index: -1;
+            transition: all 0.3s ease;
+        }
+        
+        /* Epic Hover Effects with Green Glow Blur */
         .button:hover,
         a.button:hover {
-            background: rgba(0, 255, 0, 0.2) !important;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.6) !important;
+            border-color: #00ff44 !important;
+            box-shadow: 
+                0 0 25px rgba(0, 255, 0, 0.8),
+                0 0 50px rgba(0, 255, 0, 0.4),
+                0 0 75px rgba(0, 255, 0, 0.2) !important;
             transform: translateY(-2px) !important;
-            text-shadow: 0 0 15px #00ff00 !important;
+            text-shadow: 0 0 20px #00ff00 !important;
+        }
+        
+        .button:hover::after,
+        a.button:hover::after {
+            background: rgba(0, 255, 0, 0.2);
+        }
+        
+        /* SPECIFIC BUTTON TYPE STYLING WITH FROSTED GLASS */
+        .button-yt,
+        .button-substack,
+        .button-discord,
+        .button-mastodon,
+        .button-default,
+        a[class*="button-"] {
+            position: relative !important;
+            background: transparent !important;
+            border: 2px solid #00ff00 !important;
+            color: #00ff00 !important;
+            font-family: 'VT323', 'Share Tech Mono', monospace !important;
+            font-size: 1.2rem !important;
+            font-weight: 400 !important;
+            letter-spacing: 0.05em !important;
+            padding: 12px 20px !important;
+            text-decoration: none !important;
+            text-align: center !important;
+            display: block !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3) !important;
+            text-shadow: 0 0 5px #00ff00 !important;
+            border-radius: 8px !important;
+            z-index: 1 !important;
+        }
+        
+        /* Frosted Glass for Specific Button Types */
+        .button-yt::before,
+        .button-substack::before,
+        .button-discord::before,
+        .button-mastodon::before,
+        .button-default::before,
+        a[class*="button-"]::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(15px) saturate(1.2);
+            border-radius: inherit;
+            z-index: -2;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Colored Overlays for Different Button Types */
+        .button-yt::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 0, 0, 0.15);
+            border-radius: inherit;
+            pointer-events: none;
+            z-index: -1;
+            transition: all 0.3s ease;
+        }
+        
+        .button-substack::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 108, 0, 0.15);
+            border-radius: inherit;
+            pointer-events: none;
+            z-index: -1;
+            transition: all 0.3s ease;
+        }
+        
+        .button-discord::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(88, 101, 242, 0.15);
+            border-radius: inherit;
+            pointer-events: none;
+            z-index: -1;
+            transition: all 0.3s ease;
+        }
+        
+        .button-mastodon::after,
+        .button-default::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(86, 118, 194, 0.15);
+            border-radius: inherit;
+            pointer-events: none;
+            z-index: -1;
+            transition: all 0.3s ease;
+        }
+        
+        /* Epic Hover Effects for All Button Types */
+        .button-yt:hover,
+        .button-substack:hover,
+        .button-discord:hover,
+        .button-mastodon:hover,
+        .button-default:hover,
+        a[class*="button-"]:hover {
+            border-color: #00ff44 !important;
+            box-shadow: 
+                0 0 25px rgba(0, 255, 0, 0.8),
+                0 0 50px rgba(0, 255, 0, 0.4),
+                0 0 75px rgba(0, 255, 0, 0.2) !important;
+            transform: translateY(-2px) !important;
+            text-shadow: 0 0 20px #00ff00 !important;
+        }
+        
+        .button-yt:hover::after {
+            background: rgba(255, 0, 0, 0.3);
+        }
+        
+        .button-substack:hover::after {
+            background: rgba(255, 108, 0, 0.3);
+        }
+        
+        .button-discord:hover::after {
+            background: rgba(88, 101, 242, 0.3);
+        }
+        
+        .button-mastodon:hover::after,
+        .button-default:hover::after {
+            background: rgba(86, 118, 194, 0.3);
+        }
+        
+        /* Ensure button text stays visible and crisp */
+        .button-yt *,
+        .button-substack *,
+        .button-discord *,
+        .button-mastodon *,
+        .button-default *,
+        a[class*="button-"] * {
+            position: relative;
+            z-index: 2;
+            color: #00ff00 !important;
+            text-shadow: 0 0 8px #00ff00, 0 1px 3px rgba(0, 0, 0, 0.9) !important;
         }
         
         /* Button descriptions */
@@ -887,11 +1175,18 @@
                 TNT INTELLIGENCE HUB - COMMAND CENTER
             </div>
             <div class="terminal-content">
+                <!-- FLASHING NOTICE BANNER -->
+                <div class="notice-banner">
+                    <div class="typewriter-notice">⚠️ NOTICE: UNCLASSIFIED OPERATION ⚠️</div>
+                    <div class="notice-content typewriter-tagline">
+                        The Next Thing: 67th Incursion<br>
+                        "Every 30 seconds, a new player dies on the oldest <span style="text-decoration: line-through;">anarchy</span> preservation server in Minecraft"
+                    </div>
+                </div>
+                
                 <div class="operative-profile">
                     <img class="avatar" src="images/mrrogersog.png" alt="MrRogersOG - Operative">
                     <h1 class="typewriter">MrRogersOG</h1>
-                    <h2>The Next Thing: 67th Incursion</h2>
-                    <p class="tagline">"Every 30 seconds, a new player dies on the oldest <span style="text-decoration: line-through;">anarchy</span> preservation server in Minecraft"</p>
                 </div>
                 
                 <div class="status-bar">
